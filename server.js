@@ -20,24 +20,24 @@ const server = http.createServer((req, res) => {
       path += "index.html";
       res.statusCode = 200;
       // aha! this call ends the res for the router b4 it begins
-      // res.end("under construction");
+      // res.end("under construction"); // <-------------
       router.indexPage(path, res);
       break;
     case "/about":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server about page visited");
+      res.end("Sixsinglebird's server about page under construction");
       break;
     case "/contact":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server contact page visited");
+      res.end("Sixsinglebird's server contact page under construction");
       break;
     case "/products":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server products page visited");
+      res.end("Sixsinglebird's server products page under construction");
       break;
     case "/subscribe":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server subscribe page visited");
+      res.end("Sixsinglebird's server subscribe page under construction");
       break;
     default:
       res.statusCode = 404;
