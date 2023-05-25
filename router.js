@@ -9,6 +9,26 @@ const indexPage = (path, response) => {
   displayFile(path, response);
 };
 
+const aboutPage = (path, response) => {
+  if (global.DEBUG) console.log("about.html requested");
+  displayFile(path, response);
+};
+
+const contactPage = (path, response) => {
+  if (global.DEBUG) console.log("contact.html requested");
+  displayFile(path, response);
+};
+
+const productsPage = (path, response) => {
+  if (global.DEBUG) console.log("products.html requested");
+  displayFile(path, response);
+};
+
+const subscribePage = (path, response) => {
+  if (global.DEBUG) console.log("subscribe.html resquested");
+  displayFile(path, response);
+};
+
 ////////////////////////////////////////////////
 // functions
 const displayFile = (path, response) => {
@@ -27,4 +47,8 @@ const displayFile = (path, response) => {
 
 module.exports = {
   indexPage,
+  aboutPage,
+  contactPage,
+  productsPage,
+  subscribePage,
 };

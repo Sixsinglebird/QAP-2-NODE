@@ -25,23 +25,32 @@ const server = http.createServer((req, res) => {
       break;
     case "/about":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server about page under construction");
+      path += "about.html";
+      // res.end("Sixsinglebird's server about page under construction");
+      router.aboutPage(path, res);
       break;
     case "/contact":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server contact page under construction");
+      path += "contact.html";
+      // res.end("Sixsinglebird's server contact page under construction");
+      router.contactPage(path, res);
       break;
     case "/products":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server products page under construction");
+      path += "products.html";
+      // res.end("Sixsinglebird's server products page under construction");
+      router.aboutPage(path, res);
       break;
     case "/subscribe":
       res.statusCode = 200;
-      res.end("Sixsinglebird's server subscribe page under construction");
+      path += "subscribe.html";
+      // res.end("Sixsinglebird's server subscribe page under construction");
+      router.subscribePage(path, res);
       break;
     default:
       res.statusCode = 404;
-      res.end("404 response - page not found");
+      path += "fourOhFour.html";
+      res.end("404 response - page not found - under construction");
       break;
   }
 });
