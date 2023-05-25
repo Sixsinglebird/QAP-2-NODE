@@ -2,7 +2,7 @@
 // imports
 const http = require("http");
 const router = require("./router");
-const logger = require("logger");
+const logger = require("./Logger");
 const events = require("events");
 
 ////////////////////////////////////////////////
@@ -15,23 +15,25 @@ const emitEvent = new Event();
 // server
 const server = http.createServer((req, res) => {
   // this is our debug statement for this function
-  if (DEBUG) console.log(req.url, res.url);
   // path for the response data
   let path = "./views/";
 
+  // router switch
   switch (req.url) {
     case "/":
-      path += "index.html";
       res.statusCode = 200;
+      path += "index.html";
       // aha! this call ends the res for the router b4 it begins
       // res.end("under construction"); // <-------------
       router.indexPage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "root of site was visited");
       break;
     case "/about":
       res.statusCode = 200;
       path += "about.html";
       // res.end("Sixsinglebird's server about page under construction");
       router.aboutPage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "About Page was visited");
       break;
     case "/contact":
       res.statusCode = 200;
@@ -67,4 +69,6 @@ server.listen(3000, "localhost", () =>
 );
 
 // listen for event "log"
-emitEvent.on("log", (event, level, message) => logger(event, level, message));
+emitEvent.on("log", (event, level, message) =>
+  logger.logEvent(event, level, message)
+);

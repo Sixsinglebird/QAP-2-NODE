@@ -37,10 +37,10 @@ const displayFile = (path, response) => {
       console.log(err);
       response.end();
     } else {
-      if (DEBUG) console.log("file served");
+      if (DEBUG) console.log(`${path} served`);
       response.writeHead(response.statusCode, { "Content-Type": "text/html" });
       response.write(data);
-      response.end();
+      response.end("");
     }
   });
 };
