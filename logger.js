@@ -1,7 +1,7 @@
-const logEvents = async (event, level, message) => {
-  if (event.level === "Error") {
-    console.log(new Date(), level, message);
-  }
+////////////////////////////////////////////////
+const logger = async (event, level, message) => {
+  const logItem = `${level}\t${event}\t${message}`;
+  console.log(logItem);
 };
 
-module.exports = { logEvents };
+module.exports = { logger };

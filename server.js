@@ -1,10 +1,14 @@
 ////////////////////////////////////////////////
 // imports
 const http = require("http");
+const logger = require("logger");
+const events = require("events");
 
 ////////////////////////////////////////////////
 // constants
 global.DEBUG = true;
+class Event extends events {}
+const emitEvent = new Event();
 
 ////////////////////////////////////////////////
 // server
@@ -39,7 +43,11 @@ const server = http.createServer((req, res) => {
 });
 
 ////////////////////////////////////////////////
-// server listener
+// listeners
+// listening for activity on localhost:3000
 server.listen(3000, "localhost", () =>
   console.log("Listening on port 3000...")
 );
+
+// listen for event "log"
+emitEvent.on("log", (event, level, message) => logger(event, level, message));
