@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////
 // imports
 const http = require("http");
+const router = require("./router");
 
 ////////////////////////////////////////////////
 // constants
@@ -9,11 +10,18 @@ global.DEBUG = true;
 ////////////////////////////////////////////////
 // server
 const server = http.createServer((req, res) => {
+  // this is our debug statement for this function
   if (DEBUG) console.log(req.url, res.url);
+  // path for the response data
+  let path = "./views/";
+
   switch (req.url) {
     case "/":
+      path += "index.html";
       res.statusCode = 200;
-      res.end("Sixsinglebird's server root visited");
+      // aha! this call ends the res for the router b4 it begins
+      // res.end("under construction");
+      router.indexPage(path, res);
       break;
     case "/about":
       res.statusCode = 200;
