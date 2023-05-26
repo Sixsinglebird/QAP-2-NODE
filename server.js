@@ -33,7 +33,13 @@ const server = http.createServer((req, res) => {
       break;
     default:
       res.statusCode = 404;
+<<<<<<< Updated upstream
       res.end("404 response - page not found");
+=======
+      path += "404.html";
+      // res.end("404 response - page not found - under construction");
+      router.notFoundPage(path, res);
+>>>>>>> Stashed changes
       break;
   }
 });
