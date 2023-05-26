@@ -3,14 +3,12 @@
 const weatherUrl = "https://wttr.in/";
 
 ////////////////////////////////////////////////
-const conditions = async (res) => {
+const conditions = async () => {
   try {
     const response = await fetch(weatherUrl);
     const data = await response.text();
-    // write to the head of the file what the content type is
-    res.writeHead(res.statusCode, { "Content-Type": "text/html" });
-    // write our page data
-    res.write(data);
+    const weatherConditionsDiv = document.getElementById("#weatherConditions");
+    weatherConditionsDiv.innerHTML = data;
   } catch (error) {
     console.error(error.message);
     throw error;
@@ -19,4 +17,4 @@ const conditions = async (res) => {
 
 ////////////////////////////////////////////////
 // export
-module.exports = { conditions };
+conditions();

@@ -5,40 +5,39 @@ const weather = require("./weather");
 
 ////////////////////////////////////////////////
 // website routes
-const indexPage = (path, response) => {
+const indexPage = async (path, response) => {
   if (global.DEBUG) console.log("index.html requested");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
-const aboutPage = (path, response) => {
+const aboutPage = async (path, response) => {
   if (global.DEBUG) console.log("about.html requested");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
-const contactPage = (path, response) => {
+const contactPage = async (path, response) => {
   if (global.DEBUG) console.log("contact.html requested");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
-const productsPage = (path, response) => {
+const productsPage = async (path, response) => {
   if (global.DEBUG) console.log("products.html requested");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
-const subscribePage = (path, response) => {
+const subscribePage = async (path, response) => {
   if (global.DEBUG) console.log("subscribe.html requested");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
-const weatherPage = (path, response) => {
+const weatherPage = async (path, response) => {
   if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
-  weather.conditions(response);
   displayFile(path, response);
 };
 
-const notFoundPage = (path, response) => {
+const notFoundPage = async (path, response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
 ////////////////////////////////////////////////
@@ -49,10 +48,10 @@ const displayFile = (path, response) => {
       console.log(err);
       response.end();
     } else {
-      if (DEBUG) console.log(`${path} served`);
       response.writeHead(response.statusCode, { "Content-Type": "text/html" });
       response.write(data);
       response.end("");
+      if (DEBUG) console.log(`${path} served`);
     }
   });
 };

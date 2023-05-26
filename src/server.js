@@ -23,42 +23,42 @@ const serverSwitch = http.createServer((req, res) => {
       // aha! this call ends the res for the router b4 it begins
       // res.end("under construction"); // <-------------
       router.indexPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
+      emitEvent.emit("log", req.url, "INFO", "Root request");
       break;
 
     case "/about":
       res.statusCode = 200;
       path += "about.html";
       router.aboutPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
+      emitEvent.emit("log", req.url, "INFO", "About request");
       break;
 
     case "/contact":
       res.statusCode = 200;
       path += "contact.html";
       router.contactPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
+      emitEvent.emit("log", req.url, "INFO", "Contact request");
       break;
 
     case "/products":
       res.statusCode = 200;
       path += "products.html";
       router.aboutPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
+      emitEvent.emit("log", req.url, "INFO", "Products request");
       break;
 
     case "/subscribe":
       res.statusCode = 200;
       path += "subscribe.html";
       router.subscribePage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
+      emitEvent.emit("log", req.url, "INFO", "Subcribe request");
       break;
 
     case "/nlweather":
       res.statusCode = 200;
       path += "nlweather.html";
       router.weatherPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "weather page visited");
+      emitEvent.emit("log", req.url, "INFO", "Weather request");
       break;
 
     default:
