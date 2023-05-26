@@ -3,12 +3,14 @@
 const weatherUrl = "https://wttr.in/";
 
 ////////////////////////////////////////////////
+// imports
+
+////////////////////////////////////////////////
 const conditions = async () => {
   try {
     const response = await fetch(weatherUrl);
     const data = await response.text();
-    const weatherConditionsDiv = document.getElementById("#weatherConditions");
-    weatherConditionsDiv.innerHTML = data;
+    console.log(data);
   } catch (error) {
     console.error(error.message);
     throw error;

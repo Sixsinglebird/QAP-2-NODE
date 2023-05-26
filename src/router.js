@@ -31,7 +31,7 @@ const subscribePage = async (path, response) => {
 };
 
 const weatherPage = async (path, response) => {
-  if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
+  if (global.DEBUG) console.log("nlweather.html requested");
   displayFile(path, response);
 };
 
