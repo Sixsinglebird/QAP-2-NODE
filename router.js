@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////
 // Imports
 const fs = require("fs");
+const weather = require("./weather");
 
 ////////////////////////////////////////////////
 // Routes
@@ -25,8 +26,13 @@ const productsPage = (path, response) => {
 };
 
 const subscribePage = (path, response) => {
-  if (global.DEBUG) console.log("subscribe.html resquested");
+  if (global.DEBUG) console.log("subscribe.html requested");
   displayFile(path, response);
+};
+
+const weatherPage = (response) => {
+  if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
+  weather.conditions(response);
 };
 
 const notFoundPage = (path, response) => {
@@ -57,4 +63,5 @@ module.exports = {
   productsPage,
   subscribePage,
   notFoundPage,
+  weatherPage,
 };

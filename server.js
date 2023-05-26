@@ -58,6 +58,12 @@ const server = http.createServer((req, res) => {
       emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
 
+    case "/nlweather":
+      res.statusCode = 200;
+      router.weatherPage(res);
+      emitEvent.emit("log", req.url, "INFO", "weather page visited");
+      break;
+
     default:
       res.statusCode = 404;
       path += "404.html";
