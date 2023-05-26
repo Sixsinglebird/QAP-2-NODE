@@ -56,8 +56,7 @@ const serverSwitch = http.createServer((req, res) => {
 
     case "/nlweather":
       res.statusCode = 200;
-      path += "nlweather.html";
-      router.weatherPage(path, res);
+      router.weatherPage(res);
       emitEvent.emit("log", req.url, "INFO", "weather page visited");
       break;
 

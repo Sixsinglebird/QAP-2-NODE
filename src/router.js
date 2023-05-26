@@ -5,9 +5,8 @@ const weather = require("./weather");
 
 ////////////////////////////////////////////////
 // website routes
-const indexPage = (path, response) => {
+const indexPage = async (path, response) => {
   if (global.DEBUG) console.log("index.html requested");
-<<<<<<< HEAD
   await displayFile(path, response);
 };
 
@@ -31,56 +30,30 @@ const subscribePage = async (path, response) => {
   await displayFile(path, response);
 };
 
-const weatherPage = async (path, response) => {
-  if (global.DEBUG) console.log("nlweather.html requested");
-=======
->>>>>>> parent of 4b38ccf (commit)
-  displayFile(path, response);
-};
-
-const aboutPage = (path, response) => {
-  if (global.DEBUG) console.log("about.html requested");
-  displayFile(path, response);
-};
-
-const contactPage = (path, response) => {
-  if (global.DEBUG) console.log("contact.html requested");
-  displayFile(path, response);
-};
-
-const productsPage = (path, response) => {
-  if (global.DEBUG) console.log("products.html requested");
-  displayFile(path, response);
-};
-
-const subscribePage = (path, response) => {
-  if (global.DEBUG) console.log("subscribe.html requested");
-  displayFile(path, response);
-};
-
-const weatherPage = (path, response) => {
+const weatherPage = async (response) => {
   if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
-  weather.conditions(response);
-  displayFile(path, response);
+  await weather.conditions(response);
 };
 
-const notFoundPage = (path, response) => {
+const notFoundPage = async (path, response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  displayFile(path, response);
+  await displayFile(path, response);
 };
 
 ////////////////////////////////////////////////
 // functions
-const displayFile = (path, response) => {
-  fs.readFile(path, (err, data) => {
+const displayFile = async (path, response) => {
+  await fs.readFile(path, async (err, data) => {
     if (err) {
       console.log(err);
       response.end();
     } else {
       if (DEBUG) console.log(`${path} served`);
-      response.writeHead(response.statusCode, { "Content-Type": "text/html" });
-      response.write(data);
-      response.end("");
+      await response.writeHead(response.statusCode, {
+        "Content-Type": "text/html",
+      });
+      await response.write(data);
+      response.end();
     }
   });
 };
