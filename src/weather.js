@@ -11,6 +11,7 @@ const conditions = async (res) => {
     await res.writeHead(res.statusCode, { "Content-Type": "text/html" });
     // write our page data
     await res.write(data);
+    res.end();
   } catch (error) {
     console.error(error.message);
     throw error;
