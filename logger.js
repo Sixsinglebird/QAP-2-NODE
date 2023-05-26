@@ -18,7 +18,7 @@ const logEvent = async (event, level, message) => {
     const logDir =
       "logs/" + getYear(new Date()) + "/" + getMonth(new Date()) + "/";
     if (!fs.existsSync(path.join(__dirname, logDir))) {
-      // this is fun, without the method {recursive: true }
+      // this is fun... without the method {recursive: true }
       //  mkdir will not create nested loops
       if (DEBUG) console.log("Directory made");
       await promise.mkdir(path.join(__dirname, logDir), { recursive: true });

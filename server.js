@@ -7,15 +7,15 @@ const events = require("events");
 
 ////////////////////////////////////////////////
 // constants
-global.DEBUG = true;
+global.DEBUG = false;
 class Event extends events {}
 const emitEvent = new Event();
 
 ////////////////////////////////////////////////
 // server
+// CodeMetrics tells me the complexity of this is 14...
+// -- a blatant lie
 const server = http.createServer((req, res) => {
-  // this is our debug statement for this function
-  // path for the response data
   let path = "./views/";
 
   // router switch
@@ -31,32 +31,27 @@ const server = http.createServer((req, res) => {
     case "/about":
       res.statusCode = 200;
       path += "about.html";
-      // res.end("Sixsinglebird's server about page under construction");
       router.aboutPage(path, res);
       emitEvent.emit("log", req.url, "INFO", "About Page was visited");
       break;
     case "/contact":
       res.statusCode = 200;
       path += "contact.html";
-      // res.end("Sixsinglebird's server contact page under construction");
       router.contactPage(path, res);
       break;
     case "/products":
       res.statusCode = 200;
       path += "products.html";
-      // res.end("Sixsinglebird's server products page under construction");
       router.aboutPage(path, res);
       break;
     case "/subscribe":
       res.statusCode = 200;
       path += "subscribe.html";
-      // res.end("Sixsinglebird's server subscribe page under construction");
       router.subscribePage(path, res);
       break;
     default:
       res.statusCode = 404;
       path += "404.html";
-      // res.end("404 response - page not found - under construction");
       router.notFoundPage(path, res);
       break;
   }
@@ -65,11 +60,11 @@ const server = http.createServer((req, res) => {
 ////////////////////////////////////////////////
 // listeners
 // listening for activity on localhost:3000
-server.listen(3000, "localhost", () =>
-  console.log("Listening on port 3000...")
-);
+server.listen(3000, "localhost", () => {
+  if (DEBUG) console.log("Listening on port 3000...");
+});
 
 // listen for event "log"
-emitEvent.on("log", (event, level, message) =>
-  logger.logEvent(event, level, message)
-);
+emitEvent.on("log", (event, level, message) => {
+  if (DEBUG) logger.logEvent(event, level, message);
+});
