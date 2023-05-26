@@ -7,7 +7,7 @@ const events = require("events");
 
 ////////////////////////////////////////////////
 // constants
-global.DEBUG = false;
+global.DEBUG = true;
 class Event extends events {}
 const emitEvent = new Event();
 
@@ -17,42 +17,52 @@ const emitEvent = new Event();
 // -- a blatant lie
 const server = http.createServer((req, res) => {
   let path = "./views/";
-
   // router switch
   switch (req.url) {
+    // these cases are used to direct trafic to the
+    // right path in the router
     case "/":
       res.statusCode = 200;
       path += "index.html";
       // aha! this call ends the res for the router b4 it begins
       // res.end("under construction"); // <-------------
       router.indexPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "root of site was visited");
+      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
+
     case "/about":
       res.statusCode = 200;
       path += "about.html";
       router.aboutPage(path, res);
-      emitEvent.emit("log", req.url, "INFO", "About Page was visited");
+      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
+
     case "/contact":
       res.statusCode = 200;
       path += "contact.html";
       router.contactPage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
+
     case "/products":
       res.statusCode = 200;
       path += "products.html";
       router.aboutPage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
+
     case "/subscribe":
       res.statusCode = 200;
       path += "subscribe.html";
       router.subscribePage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "File served succesfully");
       break;
+
     default:
       res.statusCode = 404;
       path += "404.html";
       router.notFoundPage(path, res);
+      emitEvent.emit("log", req.url, "INFO", "404 Page was visited");
       break;
   }
 });

@@ -28,6 +28,7 @@ const logEvent = async (event, level, message) => {
       path.join(__dirname, logDir, file),
       logItem + "\n"
     );
+    if (DEBUG) console.log("Event logged.");
   } catch (err) {
     console.log(err);
   }
