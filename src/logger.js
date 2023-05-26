@@ -34,4 +34,6 @@ const logEvent = async (event, level, message) => {
   }
 };
 
+////////////////////////////////////////////////
+// export
 module.exports = { logEvent };

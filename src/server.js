@@ -2,12 +2,8 @@
 // imports
 const http = require("http");
 const router = require("./router");
-const logger = require("./Logger");
+const logger = require("./logger");
 const events = require("events");
-
-////////////////////////////////////////////////
-// constants
-global.DEBUG = true;
 class Event extends events {}
 const emitEvent = new Event();
 
@@ -15,7 +11,7 @@ const emitEvent = new Event();
 // server
 // CodeMetrics tells me the complexity of this is 14...
 // -- a blatant lie
-const server = http.createServer((req, res) => {
+const serverSwitch = http.createServer((req, res) => {
   let path = "./views/";
   // router switch
   switch (req.url) {
@@ -60,7 +56,8 @@ const server = http.createServer((req, res) => {
 
     case "/nlweather":
       res.statusCode = 200;
-      router.weatherPage(res);
+      path += "nlweather.html";
+      router.weatherPage(path, res);
       emitEvent.emit("log", req.url, "INFO", "weather page visited");
       break;
 
@@ -74,13 +71,11 @@ const server = http.createServer((req, res) => {
 });
 
 ////////////////////////////////////////////////
-// listeners
-// listening for activity on localhost:3000
-server.listen(3000, "localhost", () => {
-  if (DEBUG) console.log("Listening on port 3000...");
-});
-
 // listen for event "log"
 emitEvent.on("log", (event, level, message) => {
-  if (DEBUG) logger.logEvent(event, level, message);
+  if (global.DEBUG) logger.logEvent(event, level, message);
 });
+
+////////////////////////////////////////////////
+// export
+module.exports = { serverSwitch };

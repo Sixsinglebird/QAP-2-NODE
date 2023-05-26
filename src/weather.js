@@ -1,15 +1,22 @@
-const weatherUrl = "https://wttr.in/st_johns_canada.json";
+////////////////////////////////////////////////
+// urls
+const weatherUrl = "https://wttr.in/";
+
+////////////////////////////////////////////////
 const conditions = async (res) => {
   try {
     const response = await fetch(weatherUrl);
     const data = await response.text();
+    // write to the head of the file what the content type is
     res.writeHead(res.statusCode, { "Content-Type": "text/html" });
+    // write our page data
     res.write(data);
-    res.end("");
   } catch (error) {
     console.error(error.message);
     throw error;
   }
 };
 
+////////////////////////////////////////////////
+// export
 module.exports = { conditions };
