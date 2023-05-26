@@ -5,8 +5,9 @@ const weather = require("./weather");
 
 ////////////////////////////////////////////////
 // website routes
-const indexPage = async (path, response) => {
+const indexPage = (path, response) => {
   if (global.DEBUG) console.log("index.html requested");
+<<<<<<< HEAD
   await displayFile(path, response);
 };
 
@@ -32,12 +33,40 @@ const subscribePage = async (path, response) => {
 
 const weatherPage = async (path, response) => {
   if (global.DEBUG) console.log("nlweather.html requested");
+=======
+>>>>>>> parent of 4b38ccf (commit)
   displayFile(path, response);
 };
 
-const notFoundPage = async (path, response) => {
+const aboutPage = (path, response) => {
+  if (global.DEBUG) console.log("about.html requested");
+  displayFile(path, response);
+};
+
+const contactPage = (path, response) => {
+  if (global.DEBUG) console.log("contact.html requested");
+  displayFile(path, response);
+};
+
+const productsPage = (path, response) => {
+  if (global.DEBUG) console.log("products.html requested");
+  displayFile(path, response);
+};
+
+const subscribePage = (path, response) => {
+  if (global.DEBUG) console.log("subscribe.html requested");
+  displayFile(path, response);
+};
+
+const weatherPage = (path, response) => {
+  if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
+  weather.conditions(response);
+  displayFile(path, response);
+};
+
+const notFoundPage = (path, response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  await displayFile(path, response);
+  displayFile(path, response);
 };
 
 ////////////////////////////////////////////////
@@ -48,10 +77,10 @@ const displayFile = (path, response) => {
       console.log(err);
       response.end();
     } else {
+      if (DEBUG) console.log(`${path} served`);
       response.writeHead(response.statusCode, { "Content-Type": "text/html" });
       response.write(data);
       response.end("");
-      if (DEBUG) console.log(`${path} served`);
     }
   });
 };
