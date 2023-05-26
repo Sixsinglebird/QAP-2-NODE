@@ -29,6 +29,11 @@ const subscribePage = (path, response) => {
   displayFile(path, response);
 };
 
+const notFoundPage = (path, response) => {
+  if (global.DEBUG) console.log("Requested page does not exist.");
+  displayFile(path, response);
+};
+
 ////////////////////////////////////////////////
 // functions
 const displayFile = (path, response) => {
@@ -51,4 +56,5 @@ module.exports = {
   contactPage,
   productsPage,
   subscribePage,
+  notFoundPage,
 };
