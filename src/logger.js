@@ -6,6 +6,10 @@ const { format, getYear, getMonth } = require("date-fns");
 const fs = require("fs");
 const promise = require("fs").promises;
 const path = require("path");
+const events = require("events");
+const { emit } = require("process");
+class Event extends events {}
+const emitEvent = new Event();
 
 ////////////////////////////////////////////////
 // function used to log events.
@@ -22,17 +26,23 @@ const logEvent = async (event, level, message) => {
       //  mkdir will not create nested loops
       if (DEBUG) console.log("Directory made");
       await promise.mkdir(path.join(__dirname, logDir), { recursive: true });
+      emitEvent.emit("log", "router", "ERROR", "New Directory Made.");
     }
     const file = `${format(new Date(), "dd")}_http_events.log`;
     await promise.appendFile(
       path.join(__dirname, logDir, file),
       logItem + "\n"
     );
-    if (DEBUG) console.log("Event logged.");
   } catch (err) {
     console.log(err);
   }
 };
+
+////////////////////////////////////////////////
+// listener
+emitEvent.on("log", (event, level, message) => {
+  if (global.DEBUG) logger.logEvent(event, level, message);
+});
 
 ////////////////////////////////////////////////
 // export

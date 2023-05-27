@@ -2,6 +2,10 @@
 // Imports
 const fs = require("fs");
 const weather = require("./weather");
+const logger = require("./logger");
+const events = require("events");
+class Event extends events {}
+const emitEvent = new Event();
 
 ////////////////////////////////////////////////
 // website routes
@@ -42,21 +46,26 @@ const notFoundPage = async (path, response) => {
 
 ////////////////////////////////////////////////
 // functions
-const displayFile = async (path, response) => {
-  await fs.readFile(path, async (err, data) => {
+const displayFile = (path, response) => {
+  fs.readFile(path, (err, data) => {
     if (err) {
+      emitEvent.emit("log", "router", "ERROR", err);
       console.log(err);
-      response.end();
     } else {
-      if (DEBUG) console.log(`${path} served`);
-      await response.writeHead(response.statusCode, {
-        "Content-Type": "text/html",
+      if (DEBUG) console.log(`${path} accessed`);
+      response.writeHead(response.statusCode, {
+        "Content-Type": "html",
       });
-      await response.write(data);
-      response.end();
+      response.end(data);
     }
   });
 };
+
+////////////////////////////////////////////////
+// listener
+emitEvent.on("log", (event, level, message) => {
+  if (global.DEBUG) logger.logEvent(event, level, message);
+});
 
 ////////////////////////////////////////////////
 // export
