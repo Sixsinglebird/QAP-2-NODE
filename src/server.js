@@ -5,7 +5,6 @@ const http = require("http");
 const router = require("./router");
 const logger = require("./logger");
 const events = require("events");
-const { emit } = require("process");
 class Event extends events {}
 const emitEvent = new Event();
 
@@ -54,12 +53,6 @@ const serverSwitch = http.createServer((req, res) => {
       res.statusCode = 200;
       router.weatherPage(res);
       emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
-      break;
-
-    case "/styles.css":
-      res.statusCode = 200;
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
-      router.stylesPage(res);
       break;
 
     default:
