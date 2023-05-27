@@ -39,6 +39,10 @@ const weatherPage = async (response) => {
   await weather.conditions(response);
 };
 
+const stylesPage = async (response) => {
+  if (global.DEBUG) console.log("Styles page requested");
+};
+
 const notFoundPage = async (path, response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
   await displayFile(path, response);
@@ -77,4 +81,5 @@ module.exports = {
   subscribePage,
   notFoundPage,
   weatherPage,
+  stylesPage,
 };
