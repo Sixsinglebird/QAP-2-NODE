@@ -1,7 +1,13 @@
 ////////////////////////////////////////////////
 // Imports
 const fs = require("fs");
-const weather = require("./weather");
+const weather = require("../views/weather");
+const index = require("../views/index");
+const fourOhFour = require("../views/fourOhFour");
+const subscribe = require("../views/subscribe");
+const products = require("../views/products");
+const about = require("../views/about");
+const contact = require("../views/contact");
 const logger = require("./logger");
 const events = require("events");
 class Event extends events {}
@@ -9,29 +15,29 @@ const emitEvent = new Event();
 
 ////////////////////////////////////////////////
 // website routes
-const indexPage = async (path, response) => {
+const indexPage = async (response) => {
   if (global.DEBUG) console.log("index.html requested");
-  await displayFile(path, response);
+  await index.page(response);
 };
 
-const aboutPage = async (path, response) => {
+const aboutPage = async (response) => {
   if (global.DEBUG) console.log("about.html requested");
-  await displayFile(path, response);
+  await about.page(response);
 };
 
-const contactPage = async (path, response) => {
+const contactPage = async (response) => {
   if (global.DEBUG) console.log("contact.html requested");
-  await displayFile(path, response);
+  await contact.page(response);
 };
 
-const productsPage = async (path, response) => {
+const productsPage = async (response) => {
   if (global.DEBUG) console.log("products.html requested");
-  await displayFile(path, response);
+  await products.page(response);
 };
 
-const subscribePage = async (path, response) => {
+const subscribePage = async (response) => {
   if (global.DEBUG) console.log("subscribe.html requested");
-  await displayFile(path, response);
+  await subscribe.page(response);
 };
 
 const weatherPage = async (response) => {
@@ -39,30 +45,9 @@ const weatherPage = async (response) => {
   await weather.conditions(response);
 };
 
-const stylesPage = async (response) => {
-  if (global.DEBUG) console.log("Styles page requested");
-};
-
-const notFoundPage = async (path, response) => {
+const notFoundPage = async (response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  await displayFile(path, response);
-};
-
-////////////////////////////////////////////////
-// functions
-const displayFile = (path, response) => {
-  fs.readFile(path, (err, data) => {
-    if (err) {
-      emitEvent.emit("log", "router", "ERROR", err);
-      console.log(err);
-    } else {
-      if (DEBUG) console.log(`${path} accessed`);
-      response.writeHead(response.statusCode, {
-        "Content-Type": "html",
-      });
-      response.end(data);
-    }
-  });
+  await fourOhFour.page(response);
 };
 
 ////////////////////////////////////////////////
@@ -81,5 +66,4 @@ module.exports = {
   subscribePage,
   notFoundPage,
   weatherPage,
-  stylesPage,
 };
