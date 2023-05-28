@@ -5,9 +5,6 @@
 //           '#    #      m""m
 //       "mmm#"  mm#mm   m'  "m
 ////////////////////////////////////////////////
-// constants
-const pages = { subscribe };
-////////////////////////////////////////////////
 // globals
 global.DEBUG = true;
 global.STYLE = `
@@ -33,14 +30,11 @@ a {
 }`;
 
 global.NAV =
-  '<nav><a href="/subscribe">subscribe</a><a href="/products">products</a><a href="/contact">contact</a><a href="/about">about</a>  <a href="/weather">weather</a><nav><a href="/">home</a></nav> </nav>';
+  '<nav><a href="/subscribe">subscribe</a><a href="/products">products</a><a href="/contact">contact</a><a href="/about">about</a>  <a href="/weather">weather</a><nav><a href="/">home</a></nav>';
 
 ////////////////////////////////////////////////
 // imports
 const server = require("./src/server");
-
-////////////////////////////////////////////////
-// functions
 
 ////////////////////////////////////////////////
 // listeners
