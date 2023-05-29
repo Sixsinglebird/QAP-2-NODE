@@ -55,9 +55,9 @@ const serverSwitch = http.createServer((req, res) => {
       emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
 
-    case "/styles/style.css":
+    case "/files/style.css":
       res.statusCode = 200;
-      path += "styles/style.css";
+      path += "files/style.css";
       router.stylePage(path, res);
       emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
