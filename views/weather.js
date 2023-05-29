@@ -8,9 +8,7 @@ const conditions = async (res) => {
     const response = await fetch(weatherUrl);
     const data = await response.text();
     const name = "weather";
-    const style = `<style>
-    ${global.STYLE}
-    </style>`;
+    const style = `${global.STYLE}`;
     const head = `<head>${style}<title>${name}</title></head>`;
     const header = `<header><h1>${name}</h1>${global.NAV}</header>`;
     await res.writeHead(res.statusCode, { "Content-Type": "text/html" });

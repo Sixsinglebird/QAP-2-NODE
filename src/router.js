@@ -41,9 +41,9 @@ const subscribePage = async (response) => {
   await subscribe.page(response);
 };
 
-const stylePage = async (path, response) => {
+const stylePage = async (response) => {
   if (global.DEBUG) console.log("style page requested.");
-  await displayFile(path, response);
+  await styleSheet(response);
 };
 
 const weatherPage = async (response) => {
@@ -53,29 +53,21 @@ const weatherPage = async (response) => {
 
 const notFoundPage = async (response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  await displayFile(path, response);
+  await fourOhFour.page(response);
 };
 
 ////////////////////////////////////////////////
 // functions
-const displayFile = (path, res) => {
-  fs.readFile(path, (err, data) => {
+const styleSheet = (res) => {
+  fs.readFile("./views/files/style.css", (err, data) => {
     if (err) {
-      // Return a 404 error if the file is not found
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end("File not found");
     } else {
-      // Set the appropriate content type based on the file extension
-      const ext = PATH.extname(path);
-      let contentType = "text/html";
-      if (ext === ".css") {
-        contentType = "text/css";
-      }
-
-      // Return the file with the correct content type
-      res.writeHead(200, { "Content-Type": contentType });
-      res.end(data);
     }
+    let contentType = "text/css";
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(data);
   });
 };
 

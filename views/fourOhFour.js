@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////
 const page = async (res) => {
   const name = "LPage not found";
-  const style = `<style>${global.STYLE}</style>`;
+  const style = `${global.STYLE}`;
   const head = `<head>${style}<title>${name}</title></head>`;
   const header = `<header><h1>this is not the page you are looking for <br />
   **waves hand**</h1>${global.NAV}</header>`;
