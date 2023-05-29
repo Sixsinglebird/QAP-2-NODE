@@ -48,6 +48,11 @@ const serverSwitch = http.createServer(async (req, res) => {
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
+    case "/news":
+      res.statusCode = 200;
+      router.newsPage(res);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
+      break;
     case "/files/style.css":
       res.statusCode = 200;
       router.stylePage(res);

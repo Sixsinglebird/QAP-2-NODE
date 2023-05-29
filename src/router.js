@@ -7,6 +7,7 @@ const subscribe = require("../views/subscribe");
 const products = require("../views/products");
 const about = require("../views/about");
 const contact = require("../views/contact");
+const news = require("../views/news");
 const logger = require("./logger");
 const events = require("events");
 class Event extends events {}
@@ -60,6 +61,11 @@ const imageRes = (path, response) => {
   image(path, response);
 };
 
+const newsPage = (response) => {
+  if (global.DEBUG) console.log("news page requested.");
+  news.topStories(response);
+};
+
 ////////////////////////////////////////////////
 // functions
 const styleSheet = (res) => {
@@ -104,4 +110,5 @@ module.exports = {
   weatherPage,
   stylePage,
   imageRes,
+  newsPage,
 };
