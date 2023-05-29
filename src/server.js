@@ -17,49 +17,49 @@ const serverSwitch = http.createServer((req, res) => {
     case "/":
       res.statusCode = 200;
       router.indexPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
     case "/about":
       res.statusCode = 200;
       router.aboutPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
     case "/contact":
       res.statusCode = 200;
       router.contactPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
     case "/products":
       res.statusCode = 200;
       router.aboutPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
     case "/subscribe":
       res.statusCode = 200;
       router.subscribePage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
     case "/weather":
       res.statusCode = 200;
       router.weatherPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} ${path}  visited`);
       break;
 
     case "/files/style.css":
       res.statusCode = 200;
       router.stylePage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      emitEvent.emit("log", "server", "STYLE", `${req.url} ${path}  visited`);
       break;
 
     default:
       res.statusCode = 404;
       router.notFoundPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
   }
 });
