@@ -26,3 +26,28 @@ a {
   text-decoration: none;
   color: rgba(0, 0, 0, 1);
 }
+
+img {
+  max-width: 30%;
+  box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.65);
+}
+
+figure {
+  margin: 16px;
+}
+
+figure img:hover {
+  width: 0;
+  height: 0;
+}
+
+figcaption {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#hideme {
+  position: absolute;
+  top: 72px;
+  left: 72px;
+}

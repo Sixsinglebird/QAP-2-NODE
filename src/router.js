@@ -1,6 +1,5 @@
 ////////////////////////////////////////////////
 // Imports
-const fs = require("fs");
 const weather = require("../views/weather");
 const index = require("../views/index");
 const fourOhFour = require("../views/fourOhFour");
@@ -12,61 +11,77 @@ const logger = require("./logger");
 const events = require("events");
 class Event extends events {}
 const emitEvent = new Event();
-const PATH = require("path");
+const fs = require("fs");
 
 ////////////////////////////////////////////////
 // website routes
-const indexPage = async (response) => {
+const indexPage = (response) => {
   if (global.DEBUG) console.log("index.html requested");
-  await index.page(response);
+  index.page(response);
 };
 
-const aboutPage = async (response) => {
+const aboutPage = (response) => {
   if (global.DEBUG) console.log("about.html requested");
-  await about.page(response);
+  about.page(response);
 };
 
-const contactPage = async (response) => {
+const contactPage = (response) => {
   if (global.DEBUG) console.log("contact.html requested");
-  await contact.page(response);
+  contact.page(response);
 };
 
-const productsPage = async (response) => {
+const productsPage = (response) => {
   if (global.DEBUG) console.log("products.html requested");
-  await products.page(response);
+  products.page(response);
 };
 
-const subscribePage = async (response) => {
+const subscribePage = (response) => {
   if (global.DEBUG) console.log("subscribe.html requested");
-  await subscribe.page(response);
+  subscribe.page(response);
 };
 
-const stylePage = async (response) => {
+const stylePage = (response) => {
   if (global.DEBUG) console.log("style page requested.");
-  await styleSheet(response);
+  styleSheet(response);
 };
 
-const weatherPage = async (response) => {
+const weatherPage = (response) => {
   if (global.DEBUG) console.log("wttr.in/st_johns_canada.json requested");
-  await weather.conditions(response);
+  weather.conditions(response);
 };
 
-const notFoundPage = async (response) => {
+const notFoundPage = (response) => {
   if (global.DEBUG) console.log("Requested page does not exist.");
-  await fourOhFour.page(response);
+  fourOhFour.page(response);
+};
+
+const imageRes = (path, response) => {
+  if (global.DEBUG) console.log("Image requested.");
+  image(path, response);
 };
 
 ////////////////////////////////////////////////
 // functions
 const styleSheet = (res) => {
+  // .views bc stack begins at App.js
   fs.readFile("./views/files/style.css", (err, data) => {
     if (err) {
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end("File not found");
     } else {
     }
-    let contentType = "text/css";
-    res.writeHead(200, { "Content-Type": contentType });
+    res.writeHead(200, { "Content-Type": "text/css" });
+    res.end(data);
+  });
+};
+
+const image = (path, res) => {
+  fs.readFile(`./views${path}`, (err, data) => {
+    if (err) {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("image not found");
+    }
+    res.writeHead(200, { "Content-Type": "image/JPG" });
     res.end(data);
   });
 };
@@ -88,4 +103,5 @@ module.exports = {
   notFoundPage,
   weatherPage,
   stylePage,
+  imageRes,
 };
