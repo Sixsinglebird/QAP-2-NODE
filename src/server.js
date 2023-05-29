@@ -17,35 +17,34 @@ const serverSwitch = http.createServer((req, res) => {
     case "/":
       res.statusCode = 200;
       path += "index.html";
-      router.indexPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path} visited`);
+      router.indexPage(res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
     case "/about":
       res.statusCode = 200;
       path += "about.html";
-      router.aboutPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      router.aboutPage(res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
     case "/contact":
       res.statusCode = 200;
       path += "contact.html";
-      router.contactPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      router.contactPage(res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
     case "/products":
       res.statusCode = 200;
-      path += "products.html";
-      router.aboutPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      router.aboutPage(res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
     case "/subscribe":
       res.statusCode = 200;
       path += "subscribe.html";
-      router.subscribePage(path, res);
+      router.subscribePage(res);
       emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
@@ -65,13 +64,8 @@ const serverSwitch = http.createServer((req, res) => {
     default:
       res.statusCode = 404;
       path += "404.html";
-      router.notFoundPage(path, res);
-      emitEvent.emit(
-        "log",
-        "server",
-        "WARNING",
-        `${req.url} ${path} 404 Page was visited`
-      );
+      router.notFoundPage(res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
   }
 });
