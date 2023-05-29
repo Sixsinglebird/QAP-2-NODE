@@ -18,28 +18,28 @@ const serverSwitch = http.createServer((req, res) => {
       res.statusCode = 200;
       path += "index.html";
       router.indexPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path} visited`);
       break;
 
     case "/about":
       res.statusCode = 200;
       path += "about.html";
       router.aboutPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
 
     case "/contact":
       res.statusCode = 200;
       path += "contact.html";
       router.contactPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
 
     case "/products":
       res.statusCode = 200;
       path += "products.html";
       router.aboutPage(path, res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
 
     case "/subscribe":
@@ -49,17 +49,29 @@ const serverSwitch = http.createServer((req, res) => {
       emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
       break;
 
-    case "/nlweather":
+    case "/weather":
       res.statusCode = 200;
       router.weatherPage(res);
-      emitEvent.emit("log", "server", "INFO", `${req.url} visited`);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
+      break;
+
+    case "/styles/style.css":
+      res.statusCode = 200;
+      path += "styles/style.css";
+      router.stylePage(path, res);
+      emitEvent.emit("log", "server", "INFO", `${req.url} ${path}  visited`);
       break;
 
     default:
       res.statusCode = 404;
       path += "404.html";
       router.notFoundPage(path, res);
-      emitEvent.emit("log", "server", "INFO", "404 Page was visited");
+      emitEvent.emit(
+        "log",
+        "server",
+        "WARNING",
+        `${req.url} ${path} 404 Page was visited`
+      );
       break;
   }
 });
