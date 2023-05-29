@@ -34,7 +34,7 @@ const serverSwitch = http.createServer((req, res) => {
 
     case "/products":
       res.statusCode = 200;
-      router.aboutPage(res);
+      router.productsPage(res);
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
