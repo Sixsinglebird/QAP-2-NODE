@@ -85,6 +85,7 @@ const serverSwitch = http.createServer(async (req, res) => {
       router.newsPage(res);
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
+
     case "/files/style.css":
       res.statusCode = 200;
       res.setHeader(
