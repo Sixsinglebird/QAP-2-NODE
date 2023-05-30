@@ -17,7 +17,7 @@ const serverSwitch = http.createServer(async (req, res) => {
   // router switch
   switch (req.url) {
     case "/":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -27,7 +27,7 @@ const serverSwitch = http.createServer(async (req, res) => {
       break;
 
     case "/about":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -37,7 +37,7 @@ const serverSwitch = http.createServer(async (req, res) => {
       break;
 
     case "/contact":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -47,7 +47,7 @@ const serverSwitch = http.createServer(async (req, res) => {
       break;
 
     case "/products":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -57,7 +57,7 @@ const serverSwitch = http.createServer(async (req, res) => {
       break;
 
     case "/subscribe":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -66,8 +66,19 @@ const serverSwitch = http.createServer(async (req, res) => {
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
 
+    // the server refuses to make coffee as it is a teapot
+    case "/coffee":
+      res.statusCode = 418;
+      res.setHeader(
+        "Set-Cookie",
+        `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
+      );
+      res.end("I'm a teapot");
+      emitEvent.emit("log", "server", "WARNING", `${req.url} I'm a teapot`);
+      break;
+
     case "/weather":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -75,9 +86,9 @@ const serverSwitch = http.createServer(async (req, res) => {
       router.weatherPage(res);
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
-
-    case "/news":
-      res.statusCode = 200;
+    /*
+      case "/news":
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -85,9 +96,10 @@ const serverSwitch = http.createServer(async (req, res) => {
       router.newsPage(res);
       emitEvent.emit("log", "server", "PAGE", `${req.url} visited`);
       break;
+    */
 
     case "/files/style.css":
-      res.statusCode = 200;
+      res.statusCode = 100;
       res.setHeader(
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
@@ -99,7 +111,7 @@ const serverSwitch = http.createServer(async (req, res) => {
     default:
       // ok so regular expressions arent supported in a switch statement.
       if (/\/images\/\w{3}_\d{4}\.JPG/i.test(req.url)) {
-        res.statusCode = 200;
+        res.statusCode = 100;
         res.setHeader(
           "Set-Cookie",
           `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
