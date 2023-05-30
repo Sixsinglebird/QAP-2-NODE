@@ -114,7 +114,12 @@ const serverSwitch = http.createServer(async (req, res) => {
           `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
         );
         router.notFoundPage(res);
-        emitEvent.emit("log", "server", "WARNING", `${req.url} visited`);
+        emitEvent.emit(
+          "log",
+          "server",
+          "WARNING",
+          `${req.url} requested page non-existent`
+        );
         break;
       }
   }
