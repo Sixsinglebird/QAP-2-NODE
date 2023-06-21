@@ -118,7 +118,7 @@ module.exports = {
   subscribePage,
   notFoundPage,
   weatherPage,
-  stylePage,
+  styleSheet,
   imageRes,
   newsPage,
 };

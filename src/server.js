@@ -104,7 +104,7 @@ const serverSwitch = http.createServer(async (req, res) => {
         "Set-Cookie",
         `cookiename=server${req.url}cookie; Expires=${cookieExp}; Path=${req.url}`
       );
-      router.stylePage(res);
+      router.styleSheet(res);
       emitEvent.emit("log", "server", "STYLE", `${req.url} visited`);
       break;
 

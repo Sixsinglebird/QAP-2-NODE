@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////
 // globals
 global.DEBUG = true;
-global.STYLE = '<link rel="stylesheet" href="files/style.css" />';
+global.STYLE = '<link rel="stylesheet" href="files/style.css" ></link>';
 global.NAV =
   '<nav><a href="/subscribe">subscribe</a><a href="/products">products</a><a href="/contact">contact</a><a href="/about">about</a>  <a href="/weather">weather</a><nav><a href="/">home</a></nav>';
 
